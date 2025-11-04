@@ -758,14 +758,14 @@ li {
 /* Individual bottle positioning and rotation */
 /* We use a CSS variable (--initial-rotate) to pass the fixed rotation to the animation */
 .sauce-bottle:nth-child(1) {
-    bottom: 5%; /* Shifted downwards */
+    bottom: 30%; /* Shifted downwards */
     left: 8%; /* Left side */
     --initial-rotate: -8deg; /* Tilted */
     animation-delay: 0.5s;
 }
 
 .sauce-bottle:nth-child(2) {
-    bottom: 12%; /* Spread out vertically */
+    bottom: 30%; /* Spread out vertically */
     right: 10%; /* Right side */
     --initial-rotate: 10deg; /* Tilted */
     animation-delay: 0.7s;
