@@ -138,3 +138,71 @@ li {
         width: 40%;
     }
 }
+
+/* Section 1: Hero - Crunchology */
+#hero {
+    /* Specific layout for hero if needed, but flexbox from page-section might suffice */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    z-index: 20; /* Ensure text is above background elements */
+    position: relative; /* For text-shadow */
+}
+
+#hero h1 {
+    font-size: clamp(4rem, 10vw, 10rem); /* More controlled responsive font size */
+    margin-bottom: 10px;
+}
+
+#hero .tagline {
+    font-family: var(--secondary-font);
+    font-weight: 600;
+    font-size: clamp(1rem, 2.5vw, 2.5rem);
+    color: var(--text-white);
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+}
+
+/* Positioning for Hero Veggies */
+#hero .top-left {
+    width: clamp(100px, 15vw, 200px); /* Responsive width */
+    height: auto;
+    top: 5%;
+    left: 2%;
+    transform: rotate(-15deg); /* Slight rotation */
+}
+
+#hero .top-left-chilli {
+    width: clamp(60px, 8vw, 120px);
+    height: auto;
+    top: 15%;
+    left: 12%;
+    transform: rotate(20deg);
+}
+
+#hero .bottom-right {
+    width: clamp(150px, 20vw, 300px);
+    height: auto;
+    bottom: 0;
+    right: 0;
+    transform: rotate(10deg);
+}
+
+/* Media Queries for Hero Section Specifics */
+@media (max-width: 768px) {
+    #hero .top-left { top: 3%; left: -5%; width: 25vw; }
+    #hero .top-left-chilli { top: 10%; left: 8%; width: 15vw; }
+    #hero .bottom-right { bottom: -5%; right: -5%; width: 35vw; }
+}
+
+@media (max-width: 480px) {
+    #hero h1 { font-size: clamp(3rem, 15vw, 8rem); }
+    #hero .tagline { font-size: clamp(0.8rem, 3.5vw, 2rem); }
+    #hero .top-left { top: 0%; left: -10%; width: 30vw; }
+    #hero .top-left-chilli { top: 8%; left: 5%; width: 18vw; }
+    #hero .bottom-right { bottom: -10%; right: -10%; width: 40vw; }
+}
