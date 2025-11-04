@@ -344,3 +344,98 @@ li {
         width: 15vw;
     }
 }
+
+/* Section 3: Menu */
+#menu {
+    text-align: left; /* Align text within columns */
+    padding-top: 80px; /* Give space for heading */
+    justify-content: flex-start; /* Align content to the top */
+}
+
+#menu h3 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 60px;
+    font-size: clamp(3rem, 5vw, 5rem);
+    z-index: 20;
+}
+
+.menu-content {
+    display: flex;
+    flex-wrap: wrap; /* Allow columns to wrap */
+    justify-content: center;
+    gap: 80px; /* Space between columns */
+    max-width: 1200px; /* Max width for menu content */
+    width: 90%;
+    position: relative;
+    z-index: 20;
+}
+
+.menu-column {
+    flex: 1; /* Distribute space */
+    min-width: 280px; /* Minimum width before wrapping */
+    padding: 20px;
+    /* background-color: rgba(0, 0, 0, 0.2); /* Subtle background for readability */
+    /* border-radius: 10px; */
+}
+
+.menu-column h4 {
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.menu-column ul {
+    margin-bottom: 30px;
+}
+
+.menu-column li {
+    font-size: clamp(1.1rem, 1.5vw, 1.8rem);
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between; /* For prices */
+    align-items: baseline;
+}
+
+.prices-heading {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.prices-list li span {
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    color: var(--primary-orange);
+    margin-left: 20px; /* Space between item and price */
+    font-size: clamp(1.2rem, 1.6vw, 1.9rem);
+}
+
+/* Positioning for Menu Packet */
+#menu .right-packet {
+    width: clamp(180px, 22vw, 300px);
+    height: auto;
+    bottom: 5%;
+    right: 2%;
+    transform: rotate(15deg);
+    z-index: 10;
+}
+
+/* Media Queries for Menu Section Specifics */
+@media (max-width: 768px) {
+    #menu h3 { font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 40px;}
+    .menu-content { flex-direction: column; gap: 40px; width: 95%;}
+    .menu-column { min-width: unset; padding: 15px;}
+    .menu-column h4 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px;}
+    .menu-column li { font-size: clamp(1.3rem, 3.5vw, 2rem); margin-bottom: 8px;}
+    .prices-list li span { font-size: clamp(1.4rem, 3.8vw, 2.2rem); margin-left: 10px;}
+    #menu .right-packet { bottom: 0%; right: -5%; width: 30vw; }
+}
+
+@media (max-width: 480px) {
+    #menu h3 { font-size: clamp(2rem, 10vw, 4rem); margin-bottom: 30px;}
+    .menu-content { gap: 30px;}
+    .menu-column h4 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 15px;}
+    .menu-column li { font-size: clamp(1.2rem, 4vw, 1.8rem);}
+    .prices-list li span { font-size: clamp(1.3rem, 4.2vw, 2rem);}
+    #menu .right-packet { bottom: -5%; right: -10%; width: 35vw; }
+}
