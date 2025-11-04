@@ -305,31 +305,24 @@ li {
 }
 
 /* Individual bottle positioning and rotation */
-/* One on the left, two on the right, spread out */
+/* One on the left, one on the right, spread out */
 
-.sauce-bottle:nth-child(1) { /* Left bottle */
-    bottom: 5%;
-    left: 5%;
-    --initial-rotate: -10deg; /* Tilted */
+.sauce-bottle:nth-child(1) { /* This is now 'sauce-bottle-1.png' */
+    bottom: 0%; /* Shifted downwards (closer to the very bottom) */
+    left: 8%; /* Maintain left position, maybe slightly more in for balance */
+    --initial-rotate: -12deg; /* Tilted */
     animation-delay: 0.5s;
 }
 
-.sauce-bottle:nth-child(2) { /* First right bottle, higher */
-    bottom: 15%;
-    right: 8%;
-    --initial-rotate: 8deg; /* Tilted */
-    animation-delay: 0.7s;
-}
-
-.sauce-bottle:nth-child(3) { /* Second right bottle, lower */
-    bottom: 5%;
-    right: 2%;
-    --initial-rotate: -5deg;
-    animation-delay: 0.9s;
+.sauce-bottle:nth-child(2) { /* This is now 'sauce-bottle-3.png' */
+    bottom: -5%; /* Move further down, slightly off-screen */
+    right: 5%; /* Moved to the right and down */
+    --initial-rotate: 10deg; /* Tilted */
+    animation-delay: 0.7s; /* Adjusted delay for the remaining second bottle */
 }
 
 /* Redefine the bottle-float keyframes to integrate the individual rotation */
-/* (This part remains the same as our previous adjustment, just ensuring it's correct) */
+/* (This part remains the same) */
 @keyframes bottle-float {
     0% {
         opacity: 0;
@@ -349,18 +342,16 @@ li {
     .sauce-bottle {
         width: 12vw; /* Adjust size for tablets */
     }
-    .sauce-bottle:nth-child(1) { bottom: 2%; left: 3%; }
-    .sauce-bottle:nth-child(2) { bottom: 10%; right: 5%; }
-    .sauce-bottle:nth-child(3) { bottom: 0%; right: 0%; }
+    .sauce-bottle:nth-child(1) { bottom: -2%; left: 5%; }
+    .sauce-bottle:nth-child(2) { bottom: -8%; right: 3%; }
 }
 
 @media (max-width: 480px) {
     .sauce-bottle {
         width: 15vw; /* Adjust size for mobile */
     }
-    .sauce-bottle:nth-child(1) { bottom: -2%; left: 0%; }
-    .sauce-bottle:nth-child(2) { bottom: 5%; right: 0%; }
-    .sauce-bottle:nth-child(3) { bottom: -5%; right: 0%; }
+    .sauce-bottle:nth-child(1) { bottom: -5%; left: 2%; }
+    .sauce-bottle:nth-child(2) { bottom: -12%; right: 0%; }
 }
 
 /* Section 3: Menu */
