@@ -1,0 +1,140 @@
+/* Global Styles */
+:root {
+    --primary-orange: #f28b00; /* A vibrant orange for headings */
+    --text-white: #ffffff;
+    --text-light-grey: #e0e0e0; /* Slightly off-white for body text */
+    --dark-background: #2b2b2b; /* Dark charcoal for fallback */
+    --chalkboard-font: 'Bebas Neue', sans-serif; /* For main headings */
+    --secondary-font: 'Montserrat', sans-serif; /* For sub-headings, bold text */
+    --body-font: 'Open Sans', sans-serif; /* For general text */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for potential anchor links */
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--text-light-grey);
+    background-color: var(--dark-background);
+    background-image: url('images/chalkboard-texture.jpg'); /* Your chalkboard image */
+    background-size: cover;
+    background-attachment: fixed; /* Keeps background fixed when scrolling */
+    background-position: center;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Common Section Styling */
+.page-section {
+    min-height: 100vh; /* Each section takes full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 60px 20px; /* Add some padding */
+    text-align: center;
+    overflow: hidden; /* Hide overflowing elements for animations */
+}
+
+h1, h2, h3 {
+    font-family: var(--chalkboard-font);
+    color: var(--primary-orange);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Subtle shadow for chalk effect */
+}
+
+h1 {
+    font-size: 8vw; /* Responsive font size */
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 6vw;
+    margin-bottom: 50px;
+}
+
+h3 {
+    font-size: 5vw;
+    margin-bottom: 30px;
+}
+
+h4 {
+    font-family: var(--secondary-font);
+    font-size: 2.5vw;
+    color: var(--text-white);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    font-size: 1.2vw; /* Responsive font size for paragraphs */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-light-grey);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+li {
+    font-family: var(--body-font);
+    font-size: 1.5vw;
+    margin-bottom: 10px;
+    color: var(--text-white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Positioning (General) */
+.veg-image, .snack-packet {
+    position: absolute;
+    z-index: 10; /* Ensure they are above text sometimes */
+    pointer-events: none; /* Make them non-interactive */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    h1 { font-size: 12vw; }
+    h2 { font-size: 9vw; }
+    h3 { font-size: 8vw; }
+    h4 { font-size: 5vw; }
+    p { font-size: 3.5vw; }
+    li { font-size: 4vw; }
+
+    .page-section {
+        padding: 40px 15px;
+        min-height: auto; /* Allow sections to adjust height on smaller screens */
+    }
+
+    /* Adjust image sizes and positions for smaller screens */
+    .veg-image, .snack-packet {
+        width: 30%; /* Example: make images smaller */
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 15vw; }
+    h2 { font-size: 11vw; }
+    h3 { font-size: 10vw; }
+    h4 { font-size: 6vw; }
+    p { font-size: 4vw; }
+    li { font-size: 4.5vw; }
+
+    .veg-image, .snack-packet {
+        width: 40%;
+    }
+}
