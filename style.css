@@ -439,3 +439,530 @@ li {
     .prices-list li span { font-size: clamp(1.3rem, 4.2vw, 2rem);}
     #menu .right-packet { bottom: -5%; right: -10%; width: 35vw; }
 }
+
+/* Global Styles */
+:root {
+    --primary-orange: #f28b00; /* A vibrant orange for headings */
+    --text-white: #ffffff;
+    --text-light-grey: #e0e0e0; /* Slightly off-white for body text */
+    --dark-background: #2b2b2b; /* Dark charcoal for fallback */
+    --chalkboard-font: 'Bebas Neue', sans-serif; /* For main headings */
+    --secondary-font: 'Montserrat', sans-serif; /* For sub-headings, bold text */
+    --body-font: 'Open Sans', sans-serif; /* For general text */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for potential anchor links */
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--text-light-grey);
+    background-color: var(--dark-background);
+    background-image: url('images/chalkboard-texture.jpg'); /* Your chalkboard image */
+    background-size: cover;
+    background-attachment: fixed; /* Keeps background fixed when scrolling */
+    background-position: center;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Common Section Styling */
+.page-section {
+    min-height: 100vh; /* Each section takes full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 60px 20px; /* Add some padding */
+    text-align: center;
+    overflow: hidden; /* Hide overflowing elements for animations */
+}
+
+h1, h2, h3 {
+    font-family: var(--chalkboard-font);
+    color: var(--primary-orange);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Subtle shadow for chalk effect */
+}
+
+h1 {
+    font-size: 8vw; /* Responsive font size */
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 6vw;
+    margin-bottom: 50px;
+}
+
+h3 {
+    font-size: 5vw;
+    margin-bottom: 30px;
+}
+
+h4 {
+    font-family: var(--secondary-font);
+    font-size: 2.5vw;
+    color: var(--text-white);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    font-size: 1.2vw; /* Responsive font size for paragraphs */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-light-grey);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+li {
+    font-family: var(--body-font);
+    font-size: 1.5vw;
+    margin-bottom: 10px;
+    color: var(--text-white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Positioning (General) */
+.veg-image, .snack-packet {
+    position: absolute;
+    z-index: 10; /* Ensure they are above text sometimes */
+    pointer-events: none; /* Make them non-interactive */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    h1 { font-size: 12vw; }
+    h2 { font-size: 9vw; }
+    h3 { font-size: 8vw; }
+    h4 { font-size: 5vw; }
+    p { font-size: 3.5vw; }
+    li { font-size: 4vw; }
+
+    .page-section {
+        padding: 40px 15px;
+        min-height: auto; /* Allow sections to adjust height on smaller screens */
+    }
+
+    /* Adjust image sizes and positions for smaller screens */
+    .veg-image, .snack-packet {
+        width: 30%; /* Example: make images smaller */
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 15vw; }
+    h2 { font-size: 11vw; }
+    h3 { font-size: 10vw; }
+    h4 { font-size: 6vw; }
+    p { font-size: 4vw; }
+    li { font-size: 4.5vw; }
+
+    .veg-image, .snack-packet {
+        width: 40%;
+    }
+}
+
+/* Section 1: Hero - Crunchology */
+#hero {
+    /* Specific layout for hero if needed, but flexbox from page-section might suffice */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    z-index: 20; /* Ensure text is above background elements */
+    position: relative; /* For text-shadow */
+}
+
+#hero h1 {
+    font-size: clamp(4rem, 10vw, 10rem); /* More controlled responsive font size */
+    margin-bottom: 10px;
+}
+
+#hero .tagline {
+    font-family: var(--secondary-font);
+    font-weight: 600;
+    font-size: clamp(1rem, 2.5vw, 2.5rem);
+    color: var(--text-white);
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+}
+
+/* Positioning for Hero Veggies */
+#hero .top-left {
+    width: clamp(100px, 15vw, 200px); /* Responsive width */
+    height: auto;
+    top: 5%;
+    left: 2%;
+    transform: rotate(-15deg); /* Slight rotation */
+}
+
+#hero .top-left-chilli {
+    width: clamp(60px, 8vw, 120px);
+    height: auto;
+    top: 15%;
+    left: 12%;
+    transform: rotate(20deg);
+}
+
+#hero .bottom-right {
+    width: clamp(150px, 20vw, 300px);
+    height: auto;
+    bottom: 0;
+    right: 0;
+    transform: rotate(10deg);
+}
+
+/* Media Queries for Hero Section Specifics */
+@media (max-width: 768px) {
+    #hero .top-left { top: 3%; left: -5%; width: 25vw; }
+    #hero .top-left-chilli { top: 10%; left: 8%; width: 15vw; }
+    #hero .bottom-right { bottom: -5%; right: -5%; width: 35vw; }
+}
+
+@media (max-width: 480px) {
+    #hero h1 { font-size: clamp(3rem, 15vw, 8rem); }
+    #hero .tagline { font-size: clamp(0.8rem, 3.5vw, 2rem); }
+    #hero .top-left { top: 0%; left: -10%; width: 30vw; }
+    #hero .top-left-chilli { top: 8%; left: 5%; width: 18vw; }
+    #hero .bottom-right { bottom: -10%; right: -10%; width: 40vw; }
+}
+
+/* Section 2: How It Works - Your Bag, Our Masala */
+#how-it-works h2 {
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 20;
+    font-size: clamp(3rem, 6vw, 6rem);
+}
+
+.steps-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+    gap: 40px; /* Space between steps */
+    margin-top: 50px;
+    position: relative;
+    z-index: 20;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px; /* Fixed width for circles, adjust for responsiveness */
+    text-align: center;
+}
+
+.step-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: var(--primary-orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease; /* Animation for hover */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step-circle:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    cursor: pointer;
+}
+
+.step p {
+    font-size: 1.2vw;
+    font-weight: 600;
+    color: var(--text-white);
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Positioning for How It Works images */
+#how-it-works .left-packet {
+    width: clamp(150px, 20vw, 250px);
+    height: auto;
+    top: 15%;
+    left: 5%;
+    transform: rotate(-10deg);
+}
+
+#how-it-works .top-right-onion {
+    width: clamp(100px, 15vw, 200px);
+    height: auto;
+    top: 5%;
+    right: 5%;
+    transform: rotate(5deg);
+}
+
+.sauce-bottles {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 15;
+    padding-bottom: 20px; /* Space from bottom edge */
+}
+
+.sauce-bottle {
+    width: clamp(60px, 8vw, 100px); /* Responsive width */
+    height: auto;
+    transform: translateY(20%); /* Start slightly off-screen */
+    opacity: 0; /* Start invisible */
+    animation: bottle-float 3s ease-out forwards; /* Animation to float in */
+}
+
+/* Individual bottle animation delay */
+.sauce-bottle:nth-child(1) { animation-delay: 0.5s; }
+.sauce-bottle:nth-child(2) { animation-delay: 0.7s; }
+.sauce-bottle:nth-child(3) { animation-delay: 0.9s; }
+.sauce-bottle:nth-child(4) { animation-delay: 1.1s; }
+.sauce-bottle:nth-child(5) { animation-delay: 1.3s; }
+.sauce-bottle:nth-child(6) { animation-delay: 1.5s; }
+
+
+/* Media Queries for How It Works Section Specifics */
+@media (max-width: 768px) {
+    #how-it-works h2 { font-size: clamp(2.5rem, 9vw, 5rem); margin-bottom: 40px;}
+    .steps-container { gap: 20px; margin-top: 30px;}
+    .step { width: 45%; } /* Two columns */
+    .step-circle { width: 100px; height: 100px; font-size: 1rem; margin-bottom: 10px;}
+    .step p { font-size: 3.5vw; }
+    #how-it-works .left-packet { top: 5%; left: -5%; width: 25vw; }
+    #how-it-works .top-right-onion { top: 0%; right: -5%; width: 20vw; }
+    .sauce-bottles {
+        gap: 10px;
+        padding-bottom: 10px;
+    }
+    .sauce-bottle {
+        width: 12vw;
+    }
+}
+
+@media (max-width: 480px) {
+    #how-it-works h2 { font-size: clamp(2rem, 11vw, 4rem); margin-bottom: 30px;}
+    .steps-container { flex-direction: column; gap: 15px; margin-top: 20px;}
+    .step { width: 80%; } /* One column */
+    .step-circle { width: 80px; height: 80px; font-size: 0.9rem; margin-bottom: 5px;}
+    .step p { font-size: 4vw; }
+    #how-it-works .left-packet { top: 0%; left: -10%; width: 30vw; }
+    #how-it-works .top-right-onion { top: -5%; right: -10%; width: 25vw; }
+    .sauce-bottles {
+        gap: 5px;
+        padding-bottom: 5px;
+    }
+    .sauce-bottle {
+        width: 15vw;
+    }
+}
+
+/* Section 3: Menu */
+#menu {
+    text-align: left; /* Align text within columns */
+    padding-top: 80px; /* Give space for heading */
+    justify-content: flex-start; /* Align content to the top */
+}
+
+#menu h3 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 60px;
+    font-size: clamp(3rem, 5vw, 5rem);
+    z-index: 20;
+}
+
+.menu-content {
+    display: flex;
+    flex-wrap: wrap; /* Allow columns to wrap */
+    justify-content: center;
+    gap: 80px; /* Space between columns */
+    max-width: 1200px; /* Max width for menu content */
+    width: 90%;
+    position: relative;
+    z-index: 20;
+}
+
+.menu-column {
+    flex: 1; /* Distribute space */
+    min-width: 280px; /* Minimum width before wrapping */
+    padding: 20px;
+    /* background-color: rgba(0, 0, 0, 0.2); /* Subtle background for readability */
+    /* border-radius: 10px; */
+}
+
+.menu-column h4 {
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.menu-column ul {
+    margin-bottom: 30px;
+}
+
+.menu-column li {
+    font-size: clamp(1.1rem, 1.5vw, 1.8rem);
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between; /* For prices */
+    align-items: baseline;
+}
+
+.prices-heading {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.prices-list li span {
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    color: var(--primary-orange);
+    margin-left: 20px; /* Space between item and price */
+    font-size: clamp(1.2rem, 1.6vw, 1.9rem);
+}
+
+/* Positioning for Menu Packet */
+#menu .right-packet {
+    width: clamp(180px, 22vw, 300px);
+    height: auto;
+    bottom: 5%;
+    right: 2%;
+    transform: rotate(15deg);
+    z-index: 10;
+}
+
+/* Media Queries for Menu Section Specifics */
+@media (max-width: 768px) {
+    #menu h3 { font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 40px;}
+    .menu-content { flex-direction: column; gap: 40px; width: 95%;}
+    .menu-column { min-width: unset; padding: 15px;}
+    .menu-column h4 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px;}
+    .menu-column li { font-size: clamp(1.3rem, 3.5vw, 2rem); margin-bottom: 8px;}
+    .prices-list li span { font-size: clamp(1.4rem, 3.8vw, 2.2rem); margin-left: 10px;}
+    #menu .right-packet { bottom: 0%; right: -5%; width: 30vw; }
+}
+
+@media (max-width: 480px) {
+    #menu h3 { font-size: clamp(2rem, 10vw, 4rem); margin-bottom: 30px;}
+    .menu-content { gap: 30px;}
+    .menu-column h4 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 15px;}
+    .menu-column li { font-size: clamp(1.2rem, 4vw, 1.8rem);}
+    .prices-list li span { font-size: clamp(1.3rem, 4.2vw, 2rem);}
+    #menu .right-packet { bottom: -5%; right: -10%; width: 35vw; }
+}
+
+/* --- Animations --- */
+
+/* Keyframes for sauce bottles floating in */
+@keyframes bottle-float {
+    0% {
+        transform: translateY(20%) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for packets to subtly float */
+@keyframes packet-float {
+    0% {
+        transform: translateY(0px) rotate(var(--initial-rotation, 0deg));
+    }
+    50% {
+        transform: translateY(-8px) rotate(calc(var(--initial-rotation, 0deg) + 2deg));
+    }
+    100% {
+        transform: translateY(0px) rotate(var(--initial-rotation, 0deg));
+    }
+}
+
+/* Apply packet-float animation to relevant elements */
+#hero .veg-image {
+    animation: packet-float 5s ease-in-out infinite;
+    /* Define initial rotation for each element using a CSS variable */
+}
+
+#hero .top-left {
+    --initial-rotation: -15deg;
+    animation-delay: 0s;
+}
+
+#hero .top-left-chilli {
+    --initial-rotation: 20deg;
+    animation-delay: 0.5s;
+}
+
+#hero .bottom-right {
+    --initial-rotation: 10deg;
+    animation-delay: 1s;
+}
+
+#how-it-works .left-packet {
+    --initial-rotation: -10deg;
+    animation: packet-float 6s ease-in-out infinite;
+    animation-delay: 0.3s;
+}
+
+#how-it-works .top-right-onion {
+    --initial-rotation: 5deg;
+    animation: packet-float 5.5s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+
+#menu .right-packet {
+    --initial-rotation: 15deg;
+    animation: packet-float 6.5s ease-in-out infinite;
+    animation-delay: 1.2s;
+}
+
+#contact .left-packet-contact {
+    --initial-rotation: -20deg;
+    animation: packet-float 5.8s ease-in-out infinite;
+    animation-delay: 0.7s;
+}
+
+#contact .top-right-chips {
+    --initial-rotation: 10deg;
+    animation: packet-float 5s ease-in-out infinite;
+    animation-delay: 0.2s;
+}
+
+/* Optional: Slight hover effect for menu items */
+.menu-column li:hover {
+    color: var(--primary-orange);
+    transform: translateX(5px);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
