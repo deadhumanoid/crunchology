@@ -621,10 +621,20 @@ li {
 #hero .top-left-chilli {
     width: clamp(60px, 8vw, 120px);
     height: auto;
-    top: 15%;
-    left: 12%;
+    top: 20%; /* Adjusted: moved down a bit */
+    left: 18%; /* Adjusted: moved right a bit */
     transform: rotate(20deg);
 }
+
+/* Also check media queries if necessary, but start with desktop */
+@media (max-width: 768px) {
+    #hero .top-left-chilli { top: 15%; left: 15%; width: 15vw; } /* Adjust for tablet */
+}
+
+@media (max-width: 480px) {
+    #hero .top-left-chilli { top: 12%; left: 10%; width: 18vw; } /* Adjust for mobile */
+}
+
 
 #hero .bottom-right {
     width: clamp(150px, 20vw, 300px);
