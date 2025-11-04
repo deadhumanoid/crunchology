@@ -966,3 +966,15 @@ li {
     transform: translateX(5px);
     transition: color 0.2s ease, transform 0.2s ease;
 }
+
+/* CSS for JavaScript scroll reveal */
+.page-section.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.page-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
