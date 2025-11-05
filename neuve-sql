@@ -1,0 +1,276 @@
+create database cs;
+use cs;
+CREATE TABLE Customer (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15),
+    address VARCHAR(255),
+    city VARCHAR(50),
+    state VARCHAR(50),
+    pincode VARCHAR(10)
+);
+CREATE TABLE Category (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(50)
+);
+CREATE TABLE Collection (
+    collection_id INT AUTO_INCREMENT PRIMARY KEY,
+    collection_name VARCHAR(50),
+    season VARCHAR(30)
+);
+CREATE TABLE Brand (
+    brand_id INT AUTO_INCREMENT PRIMARY KEY,
+    brand_name VARCHAR(50)
+);
+CREATE TABLE Gender (
+    gender_id INT AUTO_INCREMENT PRIMARY KEY,
+    gender_type VARCHAR(20)
+);
+CREATE TABLE Size (
+    size_id INT AUTO_INCREMENT PRIMARY KEY,
+    size_label VARCHAR(10)
+);
+CREATE TABLE Color (
+    color_id INT AUTO_INCREMENT PRIMARY KEY,
+    color_name VARCHAR(30)
+);
+CREATE TABLE Product (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100),
+    category_id INT,
+    collection_id INT,
+    brand_id INT,
+    gender_id INT,
+    size_id INT,
+    color_id INT,
+    price DECIMAL(10,2),
+    stock INT DEFAULT 0,
+    FOREIGN KEY (category_id) REFERENCES Category(category_id),
+    FOREIGN KEY (collection_id) REFERENCES Collection(collection_id),
+    FOREIGN KEY (brand_id) REFERENCES Brand(brand_id),
+    FOREIGN KEY (gender_id) REFERENCES Gender(gender_id),
+    FOREIGN KEY (size_id) REFERENCES Size(size_id),
+    FOREIGN KEY (color_id) REFERENCES Color(color_id)
+);
+CREATE TABLE Orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10,2),
+    order_status VARCHAR(30),
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+);
+CREATE TABLE OrderItems (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    subtotal DECIMAL(10,2),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+CREATE TABLE Payment (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    payment_method VARCHAR(50),
+    payment_status VARCHAR(30),
+    payment_date DATE,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+);
+-- alter table payment rename column payment_method to payment_gateway;
+alter table payment add column transaction_id varchar(30);
+CREATE TABLE Delivery (
+    delivery_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    delivery_address VARCHAR(255),
+    delivery_date DATE,
+    delivery_status VARCHAR(30),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+);
+CREATE TABLE Cart (
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+CREATE TABLE Wishlist (
+    wishlist_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+CREATE TABLE Review (
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    customer_id INT,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    comment VARCHAR(255),
+    review_date DATE,
+    FOREIGN KEY (product_id) REFERENCES Product(product_id),
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+);
+alter table review add column (review_text varchar(30));
+alter table review modify review_text varchar(50);
+select * from Customer;
+select * from brand;
+select * from category;
+select * from gender;
+select * from color;
+select * from size;
+select * from orders;
+select * from collection;
+select * from product;
+select * from cart;
+select * from orderitems;
+select  * from wishlist;
+select * from review;
+select * from delievery ;
+alter table delivery rename to delievery;
+alter table delievery rename to delivery;
+select * from delivery ;
+select * from payment;
+
+SELECT * FROM Product;  -- get all products 
+
+SELECT product_name, price FROM Product 
+WHERE price > 50.00;
+
+SELECT P.product_name FROM Product P 
+JOIN Brand B ON P.brand_id = B.brand_id 
+WHERE B.brand_name = 'Shadow Play';
+
+SELECT product_name, stock FROM Product 
+WHERE stock < 100;
+
+SELECT customer_id, name, phone FROM Customer 
+WHERE email = 'divya.n0006@mail.in';
+
+SELECT P.product_name, C.quantity FROM Cart C 
+JOIN Product P ON C.product_id = P.product_id 
+WHERE C.customer_id = 101; -- view cart contenets
+
+SELECT P.product_name, P.price FROM Wishlist W 
+JOIN Product P ON W.product_id = P.product_id 
+WHERE W.customer_id = 202;
+
+SELECT AVG(rating) FROM Review 
+WHERE product_id = 50; -- avg product rating 
+
+SELECT C.name, R.rating FROM Review R 
+JOIN Customer C ON R.customer_id = C.customer_id 
+WHERE R.product_id = 50 ORDER BY R.review_date DESC;  -- see rating 
+
+SELECT order_id, order_date, total_amount, order_status FROM Orders
+ WHERE customer_id = 94
+ ORDER BY order_date DESC;   -- customers order history 
+ 
+ 
+ SELECT P.product_name, OI.quantity, OI.subtotal FROM OrderItems OI 
+ JOIN Product P ON OI.product_id = P.product_id 
+ WHERE OI.order_id = 5;    -- view order detail
+ 
+ SELECT P.payment_status, P.transaction_id FROM Payment P 
+ JOIN Orders O ON P.order_id = O.order_id 
+ WHERE O.order_id = 5;     -- view payment status
+ 
+ UPDATE Delivery SET delivery_status = 'Shipped', delivery_date = CURDATE()
+ WHERE order_id = 5;     -- update delivery status 
+ 
+ SELECT order_id, customer_id FROM Orders
+ WHERE order_status = 'Pending' AND order_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);  -- find pending orders 
+ 
+SELECT P.product_name, SUM(OI.quantity) AS TotalSold FROM OrderItems OI 
+JOIN Product P ON OI.product_id = P.product_id 
+GROUP BY P.product_id 
+ORDER BY TotalSold DESC LIMIT 10;    -- top selling products 
+
+SELECT C.category_name, SUM(OI.subtotal) AS Revenue FROM OrderItems OI 
+JOIN Product P ON OI.product_id = P.product_id 
+JOIN Category C ON P.category_id = C.category_id 
+GROUP BY C.category_name 
+ORDER BY Revenue DESC;     -- total revenue by category 
+
+SELECT C.name, SUM(O.total_amount) AS TotalSpent FROM Orders O 
+JOIN Customer C ON O.customer_id = C.customer_id 
+GROUP BY C.customer_id 
+ORDER BY TotalSpent DESC LIMIT 5;   -- highest spending customer 
+
+SELECT S.size_label, SUM(P.stock) AS TotalStock FROM Product P 
+JOIN Size S ON P.size_id = S.size_id 
+GROUP BY S.size_label;       -- stock level by size / color
+
+SELECT P.payment_gateway, SUM(O.total_amount) AS Revenue FROM Payment P 
+JOIN Orders O ON P.order_id = O.order_id 
+WHERE P.payment_status = 'Success' 
+GROUP BY P.payment_gateway;    -- revenue by payment gateway 
+  -- customers queries 
+SELECT		
+P.product_id, P.product_name, B.brand_name, P.price,		
+P.stock > 0 AS is_in_stock		
+FROM Product P		
+JOIN Brand B ON P.brand_id = B.brand_id		
+LIMIT 50;      -- display product with essential info 
+
+
+SELECT 
+    P.product_name, P.price, B.brand_name, P.stock
+FROM Product P
+JOIN Collection CL ON P.collection_id = CL.collection_id
+JOIN Size S ON P.size_id = S.size_id
+JOIN Brand B ON P.brand_id = B.brand_id
+WHERE 
+    CL.collection_name = 'streetwear' 
+    AND S.size_label = '28';  
+    
+    SELECT 
+    P.product_name, P.price, B.brand_name, P.stock
+FROM Product P
+JOIN Gender G ON P.gender_id = G.gender_id
+JOIN Category C ON P.category_id = C.category_id
+JOIN Brand B ON P.brand_id = B.brand_id
+WHERE 
+    G.gender_type = 'men'     
+    AND C.category_name = 'jackets';   -- filter by gender and category 
+    
+    
+    -- Query to find all available Colors for a specific Category selection
+SELECT DISTINCT CO.color_name
+FROM Product P
+JOIN Color CO ON P.color_id = CO.color_id
+JOIN Category CA ON P.category_id = CA.category_id
+WHERE CA.category_name = 'jackets'; 
+
+
+SELECT product_name, price, brand_name		
+FROM Product P		
+JOIN Brand B ON P.brand_id = B.brand_id		
+WHERE P.price BETWEEN 50.00 AND 150.00		
+ORDER BY P.price DESC;           -- price filtered products 
+
+SELECT name, email
+FROM Customer
+WHERE customer_id IN (
+    SELECT customer_id
+    FROM Orders
+    GROUP BY customer_id
+    HAVING MAX(order_date) < DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+);              -- customers who stopped odering 
+
+SELECT 
+    (SELECT COUNT(order_id) FROM Orders) / 
+    (SELECT COUNT(customer_id) FROM Customer) AS AvgOrdersPerCustomer;     -- average order frequency 
+    
+   
+SELECT 
+    C.category_name, 
+    SUM(P.price * P.stock) AS TotalCategoryInventoryValue
+FROM Product P
+JOIN Category C ON P.category_id = C.category_id
+GROUP BY C.category_name
+ORDER BY TotalCategoryInventoryValue DESC;        -- inventory value by category 
+
+    
